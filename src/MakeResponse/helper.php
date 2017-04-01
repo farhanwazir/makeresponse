@@ -32,7 +32,7 @@ if(!function_exists('makeResponse')){
      * @param null $result
      * @param null $errors
      * @param null $message
-     * @return $this|\FarhanWazir\MakeResponse\Response
+     * @return string|array|\FarhanWazir\MakeResponse\Response
      */
     function makeResponse($status = null, $result = null, $errors = null, $message = null, $return_array = true){
         if($status){
