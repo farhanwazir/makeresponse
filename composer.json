@@ -1,0 +1,13 @@
+{
+    "name": "farhanwazir/apiresponse",
+    "description": "API Response Schema Responder.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Farhan Wazir",
+            "email": "farhan.wazir@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
