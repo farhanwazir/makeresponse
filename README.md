@@ -40,6 +40,9 @@ You just need to call `makeResponse()` helper function to respond to request. Be
 - `setResult(string|array)` set string or array for result parameter of your response
 - `set(status, result, errors, message)` set method for set response parameters once
 
+- `get()` get formatted response in json
+- `getArray()` get formatted response in array
+
 #### Get response example
 Example 1: Get formatted response in json
 ```php
