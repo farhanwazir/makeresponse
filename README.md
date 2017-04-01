@@ -88,10 +88,10 @@ makeResponse(1, null, null, null, true);
 You can also use above illustrated example and below is for Laravel and Lumen style:
 ```php
 //Response will be in json
-MakeResponse()->set(1, ['id' => 1, 'name' => 'Farhan Wazir'])->get();
+MakeResponse::set(1, ['id' => 1, 'name' => 'Farhan Wazir'])->get();
 
 //Response will be in array
-MakeResponse()->set(0, null, 'Your input is wrong', 'Input error')->getArray();
+MakeResponse::set(0, null, 'Your input is wrong', 'Input error')->getArray();
 ```
 
 
