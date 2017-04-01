@@ -1,6 +1,6 @@
 {
-    "name": "farhanwazir/apiresponse",
-    "description": "API Response Schema Responder.",
+    "name": "farhanwazir/makeresponse",
+    "description": "Make Response Schema Responder.",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -9,5 +9,16 @@
             "email": "farhan.wazir@gmail.com"
         }
     ],
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "files": [
+            "src/MakeResponse/helper.php"
+        ],
+        "psr-4": {
+            "FarhanWazir\\MakeResponse\\": "src/MakeResponse/"
+        }
+    },
     "minimum-stability": "stable"
 }
