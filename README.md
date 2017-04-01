@@ -43,16 +43,6 @@ if (!class_exists('MakeResponse')) {
 }
 ```
 
-Do not close config/app, go down inside "aliases"
-```php
-'aliases' => [
-    ...
-    'MakeResponse' => FarhanWazir\MakeResponse\Facade\MakeResponse::class
-    ...
-]
-```
-
-
 ## Usage & Response
 You just need to call `makeResponse()` helper function to respond to request. Below listed available methods will help you to explorer MakeResponse.
 
