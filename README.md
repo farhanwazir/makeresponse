@@ -12,8 +12,8 @@ Or add below line in your composer.json and run `composer update` command
 "farhanwazir/makeresponse" : "1.*"
 ```
 
-### Laravel and Lumen
-For Laravel and Lumen user's can add below line in config/app
+### Laravel user's
+For Laravel user's can add below line in config/app.php
 ```php
 'providers' => [
     ...
@@ -30,6 +30,28 @@ Do not close config/app, go down inside "aliases"
     ...
 ]
 ```
+
+### Lumen user's
+For Lumen user's can add below line in bootstrap/app.php
+```php
+$app->register(FarhanWazir\MakeResponse\MakeResponseServiceProvider::class);
+```
+Add alias as facade in laravel
+```php
+if (!class_exists('MakeResponse')) {
+    class_alias(FarhanWazir\MakeResponse\Facade\MakeResponse::class, 'MakeResponse');
+}
+```
+
+Do not close config/app, go down inside "aliases"
+```php
+'aliases' => [
+    ...
+    'MakeResponse' => FarhanWazir\MakeResponse\Facade\MakeResponse::class
+    ...
+]
+```
+
 
 ## Usage & Response
 You just need to call `makeResponse()` helper function to respond to request. Below listed available methods will help you to explorer MakeResponse.
