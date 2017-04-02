@@ -17,6 +17,7 @@ Or add below line in your composer.json and run `composer update` command
 "farhanwazir/makeresponse" : "1.*"
 ```
 
+## Laravel & Lumen Configuration
 ### Laravel user's
 For Laravel user's can add below line in config/app.php
 ```php
@@ -108,7 +109,7 @@ Example 3: Verify formatted response to client
 makeResponse(1);
 /** Output
 [
-    'status' : 1
+    'status' => 1
 ]
 */
 
@@ -128,15 +129,26 @@ makeResponse()->setStatus(0)->setErrors('You provided input is wrong.')->get()->
 Example 5: Direct class call approach
 ```php
 $response = new FarhanWazir\MakeResponse\Response();
-$response->setStatus(1);
+$response->setStatus(1)->setMessage('Make you feel comfortable');
 $response->setResult( array('id' => 1, 'name' => 'Make Responder') );
 
 
 print $response->get(); //or $response->get()->toJson();
-
+/** Output
+{
+    'status' : 1,
+    'message' : 'Make you feel comfortable',
+    'result' : ['id' => 1, 'name' => 'Make Responder']
+}
+*/
 
 //convert response in array
 print_r($response->get()->toArray());
+[
+    'status' => 1,
+    'message' => 'Make you feel comfortable',
+    'result' => ['id' => 1, 'name' => 'Make Responder']
+]
 ```
 
 **Laravel and Lumen user's**
