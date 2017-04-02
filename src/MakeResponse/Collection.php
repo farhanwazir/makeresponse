@@ -36,19 +36,39 @@ class Collection
      */
     protected $response;
 
+    /**
+     * Collection constructor.
+     *
+     * @param MakeResponse $response
+     */
     public function __construct(MakeResponse $response)
     {
         $this->response = $response;
     }
 
+    /**
+     * Response into array
+     *
+     * @return array
+     */
     public function toArray(){
         return $this->response->output;
     }
 
+    /**
+     * Response into json
+     *
+     * @return string
+     */
     public function toJson(){
         return json_encode($this->response->output);
     }
 
+    /**
+     * Dynamic response into json
+     *
+     * @return string
+     */
     public function __toString()
     {
         return $this->toJson();
