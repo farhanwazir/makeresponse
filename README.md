@@ -112,7 +112,7 @@ You can also use above illustrated example and below is for Laravel and Lumen st
 MakeResponse::set(1, ['id' => 1, 'name' => 'Farhan Wazir'])->get();
 
 //Response will be in array
-MakeResponse::set(0, null, 'Your input is wrong', 'Input error')->getArray();
+MakeResponse::set(0, null, 'Your input is wrong', 'Input error')->get()->toArray();
 ```
 
 
