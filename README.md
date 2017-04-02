@@ -1,6 +1,11 @@
 # Make Response
 This PHP library helps to generate global standard response in `JSON` and `Array` for client (API Client, POS Client, Web Client etc). It is not framework dependent, you are open to use it with any PHP project.
 
+#### Why to use this library
+- This library is a standard formatted schema to response, you don't need to make a document for every web service, just refer to this.
+- This library works logically, you must respect standards.
+- It is framework free and if you want it to use with any framework then you can. It has Laravel & Lumen build-in support as described below.
+
 ## Installation
 Via composer command
 ```composer
@@ -70,20 +75,50 @@ makeResponse($status, $result, $errors, $message, $array);
 Example 1: Get formatted response in array
 ```php
 makeResponse(1, ['id' => 1, 'name' => 'Farhan Wazir']);
+
+/** Output
+[
+    'status' => 1,
+    'result' => ['id' => 1, 'name' => 'Farhan Wazir']
+]
+*/
 ```
 Example 2: Get formatted response in json
 ```php
-makeResponse()->setStatus(1)->setErrors('You provided input is wrong.')->get();
+makeResponse()->setStatus(0)->setErrors('You provided input is wrong.')->get();
+/** Output
+{
+    'status' : 0,
+    'errors' : ['You provided input is wrong.']
+}
+*/
+
 //OR
 makeResponse(1, ['id' => 1, 'name' => 'Farhan Wazir'], null, null, false);
+/** Output
+{
+    'status' : 1,
+    'errors' : ['id' => 1, 'name' => 'Farhan Wazir']
+}
+*/
 ```
 Example 3: Verify formatted response to client
 ```php
 //Response will be in array
 makeResponse(1);
+/** Output
+[
+    'status' : 1
+]
+*/
 
 //Response will be in json
 makeResponse(1, null, null, null, false);
+/** Output
+{
+    'status' : 1
+}
+*/
 ```
 Example 4: Convert response in array
 ```php
