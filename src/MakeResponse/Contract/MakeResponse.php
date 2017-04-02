@@ -1,10 +1,9 @@
 <?php
 /**
- * Project: MakeResponse
+ * Project: makeresponse
  *
  * Author: Farhan Wazir
- * Email: farhan.wazir@gmail.com, seejee1@gmail.com
- *
+ * Email: farhan.wazir@gmail.com
  * License: MIT
  * Copyright 2017 Farhan Wazir
  *
@@ -24,24 +23,53 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-if(!function_exists('makeResponse')){
+namespace FarhanWazir\MakeResponse\Contract;
+
+
+interface MakeResponse
+{
+
     /**
-     * Make response
+     * Set response status code
      *
-     * @param null $status
+     * @param int $status
+     * @return $this
+     */
+    public function setStatus($status);
+
+    /**
+     * Set response message
+     *
+     * @param string $message
+     * @return $this
+     */
+    public function setMessage($message);
+
+    /**
+     * Set response errors
+     *
+     * @param string|array $errors
+     * @return $this
+     */
+    public function setErrors($errors);
+
+    /**
+     * Set response result
+     *
+     * @param string|array $result
+     * @return $this
+     */
+    public function setResult($result);
+
+    /**
+     * Set response at once
+     *
+     * @param $status
      * @param null $result
      * @param null $errors
      * @param null $message
-     * @return string|array|\FarhanWazir\MakeResponse\Response
+     * @return $this
      */
-    function makeResponse($status = null, $result = null, $errors = null, $message = null, $return_array = true){
-        if($status){
-            $output = (new FarhanWazir\MakeResponse\Response())->set($status, $result, $errors, $message);
-            if($return_array) $output = $output->get()->toArray();
-            else $output = $output->get();
-            return $output;
-        }
+    public function set($status, $result = null, $errors = null, $message = null);
 
-        return new FarhanWazir\MakeResponse\Response();
-    }
 }

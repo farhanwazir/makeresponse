@@ -27,16 +27,10 @@
 namespace FarhanWazir\MakeResponse;
 
 
-class Response
+use FarhanWazir\MakeResponse\Contract\MakeResponse;
+
+class Response extends Model implements MakeResponse
 {
-
-    protected $status;
-
-    protected $message;
-
-    protected $errors;
-
-    protected $result;
 
     /**
      * Set response status code
@@ -71,7 +65,7 @@ class Response
     public function setErrors($errors){
         //String and array both are supported in parameter.
         //Convert string into array
-        $this->errors = (array) $errors;
+        $this->errors = !is_null($errors) ? (array) $errors : null;
 
         return $this;
     }
@@ -85,63 +79,9 @@ class Response
     public function setResult($result){
         //String and array both are supported in parameter.
         //Convert string into array
-        $this->result = (array) $result;
+        $this->result = !is_null($result)? (array) $result : null;
 
         return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return int|mixed
-     */
-    public function getStatus(){
-        return $this->status;
-    }
-
-    /**
-     * Get message
-     *
-     * @return null|string
-     */
-    public function getMessage(){
-        return is_string($this->message) ? $this->message : null;
-    }
-
-    /**
-     * Get errors
-     *
-     * @return array|null
-     */
-    public function getErrors(){
-        return is_array($this->errors) ? $this->errors : null;
-    }
-
-    /**
-     * Get result
-     *
-     * @return array|null
-     */
-    public function getResult(){
-        return is_array($this->result) ? $this->result : null;
-    }
-
-    /**
-     * Get response in json
-     *
-     * @return string
-     */
-    public function get(){
-        return json_encode($this->makeRawResponse());
-    }
-
-    /**
-     * Get response in array
-     *
-     * @return array
-     */
-    public function getArray(){
-        return $this->makeRawResponse();
     }
 
     /**
@@ -160,37 +100,6 @@ class Response
         $this->setMessage($message);
 
         return $this;
-    }
-
-    /**
-     * Make response in raw array form
-     *
-     * @return array
-     * @throws \HttpInvalidParamException
-     * @throws \LogicException
-     */
-    protected function makeRawResponse(){
-        //Status should not be null
-        if(is_null($this->getStatus())){
-            throw new \HttpInvalidParamException("Required parameter status is missing.");
-        }
-
-        //If status is 1 then errors not allowed in response. It should be 0 or in negative value like -1, -2 or any
-        if($this->getStatus() == 1 && !is_null($this->getErrors())){
-            throw new \LogicException('If error exists in request then status must not be 1.');
-        }
-
-        $output = [];
-
-        $output['status'] = $this->getStatus();
-
-        if($this->getMessage()) $output['message'] = $this->getMessage();
-
-        if($this->getErrors()) $output['errors'] = $this->getErrors();
-
-        if($this->getResult()) $output['result'] = $this->getResult();
-
-        return $output;
     }
 
 }

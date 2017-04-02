@@ -1,10 +1,9 @@
 <?php
 /**
- * Project: MakeResponse
+ * Project: makeresponse
  *
  * Author: Farhan Wazir
- * Email: farhan.wazir@gmail.com, seejee1@gmail.com
- *
+ * Email: farhan.wazir@gmail.com
  * License: MIT
  * Copyright 2017 Farhan Wazir
  *
@@ -24,24 +23,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-if(!function_exists('makeResponse')){
-    /**
-     * Make response
-     *
-     * @param null $status
-     * @param null $result
-     * @param null $errors
-     * @param null $message
-     * @return string|array|\FarhanWazir\MakeResponse\Response
-     */
-    function makeResponse($status = null, $result = null, $errors = null, $message = null, $return_array = true){
-        if($status){
-            $output = (new FarhanWazir\MakeResponse\Response())->set($status, $result, $errors, $message);
-            if($return_array) $output = $output->get()->toArray();
-            else $output = $output->get();
-            return $output;
-        }
+namespace FarhanWazir\MakeResponse\Tests;
 
-        return new FarhanWazir\MakeResponse\Response();
+
+use FarhanWazir\MakeResponse\Response;
+use PHPUnit\Framework\TestCase;
+
+class ResponseTest extends TestCase
+{
+
+    public function testOnlyStatus(){
+        $this->assertJsonStringEqualsJsonString((new Response())->setStatus(1)->get()->toJson(), (new Response())->setStatus(1)->get()->toJson());
     }
+
+    public function testWithMessage(){
+        $this->assertArrayHasKey('message', (new Response())->setStatus(0)->setMessage('Test with message')->get()->toArray());
+    }
+
+    public function testPrintHelper(){
+        var_dump(makeResponse()->set(1, 'Executed from helper!', null, 'Test to print object via helper function')->get());
+    }
+
+    public function testPrintCollection(){
+        print (new Response())->set(1, 'Executed successfully!', null, 'Test to print object')->get();
+    }
+
 }
