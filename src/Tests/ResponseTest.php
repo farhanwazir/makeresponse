@@ -41,7 +41,7 @@ class ResponseTest extends TestCase
     }
 
     public function testPrintHelper(){
-        var_dump(makeResponse()->set(1, 'Executed from helper!', null, 'Test to print object via helper function')->get());
+        print(makeResponse(1, 'Executed from helper!', null, 'Test to print object via helper function', false));
     }
 
     public function testPrintCollection(){

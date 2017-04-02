@@ -43,7 +43,7 @@ if (!class_exists('MakeResponse')) {
 }
 ```
 
-## Usage & Response
+## Usage
 You just need to call `makeResponse()` helper function to respond to request. Below listed available methods will help you to explorer MakeResponse.
 
 - `setStatus(numeric)` set numeric value with positive or negative
@@ -52,25 +52,56 @@ You just need to call `makeResponse()` helper function to respond to request. Be
 - `setResult(string|array)` set string or array for result parameter of your response
 - `set(status, result, errors, message)` set method for set response parameters once
 
-- `get()` get formatted response in json
-- `getArray()` get formatted response in array
+- `get()` get formatted response collection
+- `get()->toArray()` convert collection in array
+- `get()->toJson()` convert collection in json
+
+#### Use via helper function
+```php
+makeResponse($status, $result, $errors, $message, $array);
+```
+- `$status` must be numeric positive or negative.
+- `$result` string or array. `Default null`
+- `$errors` string or array. `Default null`
+- `$message` one line string. `Default null`
+- `$array` boolean, it is belongs to returning response (in array or json). `Default true`
 
 #### Get response example
-Example 1: Get formatted response in json
+Example 1: Get formatted response in array
 ```php
 makeResponse(1, ['id' => 1, 'name' => 'Farhan Wazir']);
 ```
-Example 2: Get formatted response in Array
+Example 2: Get formatted response in json
 ```php
-makeResponse()->setStatus(1)->setErrors('You provided input is wrong.')->getArray();
+makeResponse()->setStatus(1)->setErrors('You provided input is wrong.')->get();
+//OR
+makeResponse(1, ['id' => 1, 'name' => 'Farhan Wazir'], null, null, false);
 ```
 Example 3: Verify formatted response to client
 ```php
-//Response will be in json
+//Response will be in array
 makeResponse(1);
 
-//Response will be in array
-makeResponse(1, null, null, null, true);
+//Response will be in json
+makeResponse(1, null, null, null, false);
+```
+Example 4: Convert response in array
+```php
+// makeResponse()->toArray() converts into array and same for json by toJson()
+makeResponse()->setStatus(0)->setErrors('You provided input is wrong.')->get()->toArray();
+```
+Example 5: Direct class call approach
+```php
+$response = new FarhanWazir\MakeResponse\Response();
+$response->setStatus(1);
+$response->setResult( array('id' => 1, 'name' => 'Make Responder') );
+
+
+print $response->get(); //or $response->get()->toJson();
+
+
+//convert response in array
+print_r($response->get()->toArray());
 ```
 
 **Laravel and Lumen user's**
