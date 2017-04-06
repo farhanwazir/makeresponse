@@ -65,7 +65,7 @@ class Response extends Model implements MakeResponse
     public function setErrors($errors){
         //String and array both are supported in parameter.
         //Convert string into array
-        $this->errors = !is_null($errors) ? (array) $errors : null;
+        $this->errors = !is_null($errors) ? [$errors] : null;
 
         return $this;
     }
@@ -79,7 +79,7 @@ class Response extends Model implements MakeResponse
     public function setResult($result){
         //String and array both are supported in parameter.
         //Convert string into array
-        $this->result = !is_null($result)? (array) $result : null;
+        $this->result = !is_null($result)? [$result] : null;
 
         return $this;
     }
